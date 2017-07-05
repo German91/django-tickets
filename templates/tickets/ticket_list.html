@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>My Tickets</h1>
+    <hr>
+
+    {% for ticket in tickets %}
+    {% empty %}
+        <h3>No Open tickets available</h3>
+    {% endfor %}
+
+{% endblock %}
