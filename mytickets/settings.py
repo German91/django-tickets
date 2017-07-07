@@ -133,7 +133,7 @@ DATABASES['default'] = dj_database_url.config()
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ALLOWED_HOSTS = ['localhost', '121.0.0.1', 'djang-tickets.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '121.0.0.1', 'django-tickets.herokuapp.com']
 
 DEBUG = False
 
