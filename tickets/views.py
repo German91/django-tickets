@@ -37,3 +37,10 @@ def ticket_edit(request, pk):
             form.save(commit=True)
             return redirect('ticket_list')
     return render(request, 'tickets/ticket_edit.html', {'form': form, 'ticket': ticket})
+
+
+@login_required
+def ticket_delete(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk, creator=request.user)
+    ticket.delete()
+    return redirect('ticket_list')

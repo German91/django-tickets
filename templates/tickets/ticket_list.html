@@ -19,6 +19,7 @@
         <h3><a href="{% url 'ticket_edit' pk=ticket.pk %}">{{ ticket.title }}</a></h3>
         <p>{{ ticket.description }}</p>
         <small>Created By {{ ticket.creator }}</small>
+        <p><a href="{% url 'ticket_delete' pk=ticket.pk %}">Remove</a></p>
       </div>
       <br><br>
     {% empty %}
