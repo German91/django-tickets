@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Tickets App</title>
+    {% block head_title %}
+        <title>My Tickets App</title>
+    {% endblock head_title %}
 </head>
 <body>
+    {% block nav %}
+        {% include "snippets/navigation.html" %}
+    {% endblock nav %}
+
     {% block content %}
 
     {% endblock %}
