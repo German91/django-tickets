@@ -1,8 +1,29 @@
-<ul>
-  <li><a href="{% url 'ticket_list' %}">My Tickets</a></li>
-  <li><a href="{% url 'ticket_create' %}">Create Ticket</a></li>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'ticket_list' %}">My Tickets App</a>
+    </div>
 
-  {% if user.is_authenticated %}
-    <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
-  {% endif %}
-</ul>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li {% if "/tickets/" == request.path %}class="active"{% endif %}><a href="{% url 'ticket_list' %}">My Tickets</a></li>
+        <li {% if "/tickets/create/" == request.path %}class="active"{% endif %}><a href="{% url 'ticket_create' %}">Create Ticket</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+          <li><a href="" role="button">Welcome {{ user }}</a></li>
+          <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<ul>

@@ -1,29 +1,64 @@
 {% extends 'base.html' %}
 
+{% load bootstrap3 %}
+
 {% block content %}
-    <h1>My Tickets</h1>
-    <hr>
 
-    {% if tickets %}
-      <form method="get">
-        {{ tickets.form }}
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <h1>My Tickets</h1>
 
-        <button type="submit">Filter</button>
-      </form>
-      <br><br>
-    {% endif %}
+      {% if tickets %}
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+            <form method="get" class="form">
+              {% bootstrap_form tickets.form %}
 
-    {% for ticket in tickets.qs %}
-      <div>
-        <small>{{ ticket.created_date }}</small>
-        <h3><a href="{% url 'ticket_edit' pk=ticket.pk %}">{{ ticket.title }}</a></h3>
-        <p>{{ ticket.description }}</p>
-        <small>Created By {{ ticket.creator }}</small>
-        <p><a href="{% url 'ticket_delete' pk=ticket.pk %}">Remove</a></p>
+              <div class="form-group">
+                <button type="submit" class="btn btn-default">Filter</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+      <hr />
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+          {% for ticket in tickets.qs %}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <label
+                  {% if ticket.status == 'OPEN' %}
+                    class="label label-success"
+                  {% elif status == 'REVIEW' %}
+                    class="label label-info"
+                  {% else %}
+                    class="label label-warning"
+                  {% endif %}>{{ ticket.status }}</label>
+
+                  <a href="{% url 'ticket_edit' pk=ticket.pk %}">{{ ticket.title }}</a>
+                </h3>
+              </div>
+
+              <div class="panel-body">
+                <p>{{ ticket.description }}</p>
+                <p><small>Created by {{ ticket.creator }}</small></p>
+              </div>
+
+              <div class="panel-footer">
+                <a href="{% url 'ticket_delete' pk=ticket.pk %}" class="btn btn-danger">Remove</a>
+              </div>
+            </div>
+          {% empty %}
+              <div class="text-center">
+                <h3>No Open tickets available</h3>
+              </div>
+          {% endfor %}
+        </div>
       </div>
-      <br><br>
-    {% empty %}
-        <h3>No Open tickets available</h3>
-    {% endfor %}
+    </div>
+  </div>
 
 {% endblock %}
