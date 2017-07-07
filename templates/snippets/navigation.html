@@ -1,6 +1,6 @@
 <ul>
   <li><a href="{% url 'ticket_list' %}">My Tickets</a></li>
-  <li><a href="{% url 'ticket_list' %}">Create Ticket</a></li>
+  <li><a href="{% url 'ticket_create' %}">Create Ticket</a></li>
 
   {% if user.is_authenticated %}
     <li><a href="{% url 'logout' %}?next=/">Logout</a></li>

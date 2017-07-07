@@ -19,5 +19,5 @@ class Ticket(models.Model):
     def get_by_title(cls, title):
         return cls.objects.filter(title=title)
 
-    def __srt__(self):
+    def __str__(self):
         return self.title

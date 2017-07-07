@@ -4,7 +4,23 @@
     <h1>My Tickets</h1>
     <hr>
 
-    {% for ticket in tickets %}
+    {% if tickets %}
+      <form method="get">
+        {{ tickets.form }}
+
+        <button type="submit">Filter</button>
+      </form>
+      <br><br>
+    {% endif %}
+
+    {% for ticket in tickets.qs %}
+      <div>
+        <small>{{ ticket.created_date }}</small>
+        <h3>{{ ticket.title }}</h3>
+        <p>{{ ticket.description }}</p>
+        <small>Created By {{ ticket.creator }}</small>
+      </div>
+      <br><br>
     {% empty %}
         <h3>No Open tickets available</h3>
     {% endfor %}
