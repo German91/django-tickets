@@ -1,12 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'registration/base.html' %}
 
-{% block content %}
-    <form action="{% url 'login' %}" method="post">{% csrf_token %}
-        {{ form.as_p }}
+{% load bootstrap3 %}
 
-        <input type="submit" value="Login" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </form>
+{% block auth_content %}
 
-    <p><a href="{% url 'register' %}">Create an account</a></p>
+  <h1 class="text-center">Login</h1>
+  <hr>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <form class="form-horizontal" action="{% url 'login' %}" method="post">{% csrf_token %}
+          {% bootstrap_form form %}
+
+          <div class="form-group text-center">
+            <input type="submit" class="btn btn-default" value="Login" />
+          </div>
+
+          <input type="hidden" name="next" value="{{ next }}" />
+      </form>
+    </div>
+  </div>
+
+  <p class="text-center"><a href="{% url 'register' %}">Create an account</a></p>
+
 {% endblock %}

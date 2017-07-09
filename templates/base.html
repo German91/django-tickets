@@ -1,12 +1,27 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Tickets App</title>
+      <title>{% block head_title %}My Tickets App{% endblock %}</title>
+
+    <!-- Stylesheets -->
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
-    {% block content %}
 
-    {% endblock %}
+    {% block nav %}
+        {% include "snippets/navigation.html" %}
+    {% endblock nav %}
+
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+
+    <!-- Scripts -->
+    {% bootstrap_javascript %}
 </body>
 </html>
