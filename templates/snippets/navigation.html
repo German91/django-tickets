@@ -18,7 +18,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
-          <li><a href="" role="button">Welcome {{ user }}</a></li>
+          <li><a href="{% url 'profile' %}" role="button">Welcome {{ user }}</a></li>
           <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
         {% endif %}
       </ul>

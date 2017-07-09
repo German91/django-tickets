@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^tickets/', include('tickets.urls')),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^$', views.login, name='login', kwargs={'redirect_authenticated_user': True}),
+    url(r'^accounts/', include('authentication.urls')),
 ]

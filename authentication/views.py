@@ -1,10 +1,18 @@
-from django.shortcuts import render, redirect
+"""
+Register, update user profile
+"""
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .forms import RegisterForm
 
 
 def register(request):
+    """
+    Create new user
+    """
     form = RegisterForm()
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -22,3 +30,15 @@ def register(request):
                 login(request, auth)
                 return redirect('ticket_list')
     return render(request, 'registration/register.html', {'form': form})
+
+@login_required
+def profile(request):
+    """
+    Edit user profile
+    """
+    if request.method == 'POST':
+        user = get_object_or_404(User, username=request.user.username)
+        user.username = request.POST.get('username')
+        user.save()
+        return redirect('profile')
+    return render(request, 'auth/profile.html')
