@@ -38,7 +38,7 @@
                     class="label label-warning"
                   {% endif %}>{{ ticket.status }}</label>
 
-                  <a href="{% url 'ticket_edit' pk=ticket.pk %}">{{ ticket.title }}</a>
+                  <a href="{% url 'ticket_edit' slug=ticket.slug %}">{{ ticket.title }}</a>
                 </h3>
               </div>
 

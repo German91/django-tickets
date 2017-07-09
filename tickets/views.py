@@ -28,8 +28,8 @@ def ticket_create(request):
 
 
 @login_required
-def ticket_edit(request, pk):
-    ticket = get_object_or_404(Ticket, pk=pk, creator=request.user)
+def ticket_edit(request, slug):
+    ticket = get_object_or_404(Ticket, slug=slug, creator=request.user)
     form = TicketEditForm(instance=ticket)
     if request.method == 'POST':
         form = TicketEditForm(request.POST, instance=ticket)
