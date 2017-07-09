@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from .models import Ticket
@@ -40,7 +40,9 @@ def ticket_edit(request, pk):
 
 
 @login_required
-def ticket_delete(request, pk):
+def ticket_delete(request):
+    pk = int(request.POST['pk'])
     ticket = get_object_or_404(Ticket, pk=pk, creator=request.user)
     ticket.delete()
-    return redirect('ticket_list')
+    # return redirect('ticket_list')
+    return HttpResponse('Ticket successfuly removed')
