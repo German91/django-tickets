@@ -41,7 +41,7 @@ def profile(request):
         user = get_object_or_404(User, username=request.user.username)
         user.username = request.POST.get('username')
         user.save()
-        return redirect('profile')
+        messages.add_message(request, messages.SUCCESS, 'Username successfully updated')
     return render(request, 'auth/profile.html')
 
 @login_required

@@ -8,6 +8,8 @@
       <h1>Edit {{ ticket.title }}</h1>
       <hr>
 
+      {% bootstrap_messages %}
+
       <form method="post">{% csrf_token %}
         {% bootstrap_form form %}
 

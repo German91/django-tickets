@@ -7,6 +7,11 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
       <h1>My Tickets</h1>
+      <hr>
+
+      <div id="ticket_messages">
+        {% bootstrap_messages %}
+      </div>
 
       {% if tickets %}
         <div class="row">
@@ -72,9 +77,13 @@
                 },
 
                 success: function(response) {
+                   var container = $('#ticket_messages');
                    var parent = document.getElementById('tickets');
                    var child = document.getElementById(pk);
+                   
+                   var message = '<div class="alert alert-success"><p>Ticket successfuly removed</p></div>';
 
+                   container.append(message);
                    parent.removeChild(child);
                 },
             });
