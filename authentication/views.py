@@ -5,8 +5,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib import messages
 
-from .forms import RegisterForm
+from .forms import RegisterForm, ChangePasswordForm
 
 
 def register(request):
@@ -42,3 +43,22 @@ def profile(request):
         user.save()
         return redirect('profile')
     return render(request, 'auth/profile.html')
+
+@login_required
+def change_password(request):
+    form = ChangePasswordForm()
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            password1 = form.cleaned_data.get('password1')
+            user = get_object_or_404(User, username=request.user.username)
+            user.set_password(password1)
+            user.save()
+
+            auth = authenticate(username=user.username, password=password1)
+
+            if auth is not None:
+                login(request, auth)
+                messages.add_message(request, messages.SUCCESS, 'Password successfully changed')
+    return render(request, 'auth/change_password.html', {'form': form})
+            
